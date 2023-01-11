@@ -8,26 +8,30 @@ import java.util.*;
 public class N2822 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        Map<Integer, Integer> score = new HashMap<>();
+        int[][] score = new int[8][2];
+        int[] result = new int[5];
         int sum = 0;
 
-        for (int i = 1; i <= 8; i++) {
-            score.put(i, Integer.parseInt(br.readLine()));
+        for (int i = 0; i < 8; i++) {
+            score[i][0] = Integer.parseInt(br.readLine());
+            score[i][1] = i + 1;
         }
 
-        List<Integer> number = new ArrayList<>(score.values());
-        Collections.sort(number);
+        Arrays.sort(score, (int[] a, int[] b) -> {
+            return b[0] - a[0];
+        });
 
-        for (int index = 7; index > 2; index--) {
-            sum += number.get(index);
+        for (int i = 0; i < 5; i++) {
+            sum += score[i][0];
+            result[i] = score[i][1];
         }
+
+        Arrays.sort(result);
 
         System.out.println(sum);
-        System.out.println(score);
 
-//        for (int index = 3; index < 8; index++) {
-//            System.out.print(number.get(index) + " ");
-//            System.out.print(score.get(number.get(index))+" ");
-//        }
+        for (int i = 0; i < 5; i++) {
+            System.out.print(result[i] + " ");
+        }
     }
 }
